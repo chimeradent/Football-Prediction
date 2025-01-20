@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier League Matches</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #eef2f3;
+            color: #444;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #f9f9f9;
+            margin: 10px 0; /* Margin between each match */
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        li:hover {
+            background: #f1f1f1;
+        }
+        button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #3498db;
+            transform: translateY(-1px);
+        }
+        nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Premier League Matches</h1>
+    <section>
+        <ul>
+            {% for match in matches %}
+            <li>
+                <strong>Round:</strong> {{ match.round }} | <strong>Date:</strong> {{ match.date }} <br>
+                <strong>{{ match.home_team }}</strong> vs <strong>{{ match.away_team }}</strong>
+                <form action="{{ url_for('match', match_id=loop.index) }}" method="get" style="display:inline;">
+                    <button type="submit">Match Details</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <nav>
+        <form action="{{ url_for('index') }}" method="get">
+            <button type="submit">Home</button>
+        </form>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Match Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        h2 {
+            text-align: center;
+            color: #555;
+        }
+        h3 {
+            color: #444;
+        }
+        .match-details {
+            background-color: #fff;
+            padding: 15px;
+            margin: 15px 0; /* Margin between each match */
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Match Details</h1>
+    <h2>{{ match.home_team }} vs {{ match.away_team }}</h2>
+
+    <div class="match-details">
+        <h3>Last 5 Matches</h3>
+        <h4>{{ match.home_team }}</h4>
+        <p>Goals: {{ home_goals }}</p>
+        
+        
+        <h4>{{ match.away_team }}</h4>
+        <p>Goals: {{ away_goals }}</p>
+        
+    </div>
+
+    <div class="match-details">
+        <h3>Winning Chances</h3>
+        <img src="data:image/png;base64,{{ pie_chart }}" alt="Winning Chances Pie Chart">
+
+        <h3>Prediction Probabilities</h3>
+        <ul>
+            <li>Team 1 Win: {{ prediction[0] }}</li>
+            <li>Team 2 Win: {{ prediction[1] }}</li>
+            <li>Draw: {{ 1 - (prediction[0] + prediction[1]) }}</li> <!-- Calculate draw probability -->
+        </ul>
+    </div>
+
+    <div class="match-details">
+        <h3>Last Meetings</h3>
+        {% if meeting_pie_chart %}
+            <img src="data:image/png;base64,{{ meeting_pie_chart }}" alt="Last Meetings Pie Chart">
+        {% else %}
+            <p>No matches have been played between these teams.</p>
+        {% endif %}
+    </div>
+
+    <nav>
+        <form action="" method="get">
+            <button type="submit">Back to Matches</button>
+        </form>
+    </nav>
+</body>
+</html>
